@@ -1,0 +1,19 @@
+{
+    "mos.port": "",
+    "files.associations": {
+        "array": "cpp",
+        "hash_map": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "string_view": "cpp",
+        "initializer_list": "cpp",
+        "ranges": "cpp",
+        "mgos_uart_internal.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled",
+    "mos.board": "ESP32",
+    "C_Cpp.default.includePath": ["${workspaceFolder}/../mongoose-os/include"]
+}
