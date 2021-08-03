@@ -31,10 +31,10 @@ void uart_init(uint8_t uart_no);
 
 static void dxl_task1(void *arg) 
 {
-  uint8_t r,g,b;
-  mgos_dxl_module_read(dxl_module, RGB_RED, &r);
-  mgos_dxl_module_read(dxl_module, RGB_GREEN, &g);
-  mgos_dxl_module_read(dxl_module, RGB_BLUE, &b);
+  static uint8_t r = 0, g = 0, b = 0;
+  mgos_dxl_module_read(dxl_module, RGB_RED, (char * ) &r);
+  mgos_dxl_module_read(dxl_module, RGB_GREEN, (char * ) &g);
+  mgos_dxl_module_read(dxl_module, RGB_BLUE, (char * ) &b);
 
   LOG(LL_INFO, ("LED: %d:%d:%d", r, g, b));
 
@@ -50,9 +50,9 @@ static void dxl_task1(void *arg)
     g = 0; 
   }
 
-  mgos_dxl_module_write(dxl_module, RGB_RED, &r);
-  mgos_dxl_module_write(dxl_module, RGB_GREEN, &g);
-  mgos_dxl_module_write(dxl_module, RGB_BLUE, &b);
+  mgos_dxl_module_write(dxl_module, RGB_RED, r);
+  mgos_dxl_module_write(dxl_module, RGB_GREEN, g);
+  mgos_dxl_module_write(dxl_module, RGB_BLUE, b);
 
   (void) arg;
 }
@@ -77,6 +77,12 @@ enum mgos_app_init_result mgos_app_init(void)
   mgos_dxl_module_begin(57600);
  
   mgos_dxl_module_init(dxl_module);
+
+#ifdef __cplusplus
+  LOG(LL_INFO, ("__cplusplus"));
+#else
+  LOG(LL_INFO, ("pure C:"));
+#endif  
 
   return MGOS_APP_INIT_SUCCESS;
 }
