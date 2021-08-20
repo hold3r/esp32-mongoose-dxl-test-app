@@ -51,6 +51,7 @@ filesystem:
 libs:
   - origin: https://github.com/mongoose-os-libs/boards
   - origin: https://github.com/hold3r/esp32-mos-dxl
+  - origin: https://github.com/mongoose-os-libs/rpc-common
 
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
