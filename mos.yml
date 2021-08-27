@@ -45,13 +45,17 @@ filesystem:
 # settings that has been created by other libraries. For example, debug log
 # level is 2 by default. For this firmware we can override it to 3:
 #
-# config_schema:
-#  - ["debug.level", 3]
 
+config_schema:
+  - ["debug.level", 3]
+  - ["wifi.ap.enable", false]
+  - ["wifi.sta.enable", false]
+  - ["bt.enable", false]
+  - ["http.enable", false]
+  
 libs:
-  - origin: https://github.com/mongoose-os-libs/boards
-  - origin: https://github.com/hold3r/esp32-mos-dxl
-  - origin: https://github.com/mongoose-os-libs/rpc-common
+  - location: https://github.com/hold3r/mgos-dxlmaster
+
 
 
 # Used by the mos tool to catch mos binaries incompatible with this file format
