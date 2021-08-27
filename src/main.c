@@ -1,7 +1,3 @@
-/*
- *
- */
-
 #include "mgos.h"
 #include "mgos_app.h"
 #include "mgos_gpio.h"
@@ -16,9 +12,8 @@
 #define RGB_BLUE  (28)
 #define MODULE_ID (0x15)
 
-mgos_timer_id dxl_task1_id;
-mgos_timer_id led_task_id;
  
+/* Create Dynamixel device */ 
 DynamixelDevice * rgb = NULL;
 
 
@@ -62,11 +57,13 @@ static void led_task(void *arg)
   (void) arg;
 }
 
+/* User UART callback */
 void user_cb(uint16_t len, uint8_t *data, void *userdata)
 {
   mgos_uart_write(UARTno, data, len);
   (void) userdata;
 }
+
 
 enum mgos_app_init_result mgos_app_init(void) 
 {
@@ -76,11 +73,10 @@ enum mgos_app_init_result mgos_app_init(void)
   mgos_dxl_master_begin(57600);
   mgos_dxl_init(rgb);
 
-
   mgos_dxl_setUserUartCb(user_cb, NULL);
 
-  dxl_task1_id = mgos_set_timer(500 , MGOS_TIMER_REPEAT, dxl_task1, NULL);
-  led_task_id = mgos_set_timer(333 , MGOS_TIMER_REPEAT, led_task, NULL);
+  mgos_set_timer(500 , MGOS_TIMER_REPEAT, dxl_task1, NULL);
+  mgos_set_timer(333 , MGOS_TIMER_REPEAT, led_task, NULL);
 
   return MGOS_APP_INIT_SUCCESS;
 }
